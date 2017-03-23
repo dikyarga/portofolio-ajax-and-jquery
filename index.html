@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<title>Ajax and jQuery</title>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+          var boxesNumber = ['satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan']
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            $("button").click(function() {
+                $.ajax({
+                    url: "http://www.colr.org/json/scheme/random",
+                    success: function(result) {
+                      var index =  getRandomInt(0, 8)
+                        var colors = JSON.parse(result)
+                        console.log(boxesNumber[index]);
+                        $("." + boxesNumber[index]).css("background-color", '#' + colors.schemes[0].colors[0])
+                    }
+                });
+            });
+        });
+    </script>
+    <style media="screen">
+        .box {
+            height: 200px;
+            width: 200px;
+            border: 2px solid black;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="div1">
+        <h2>Let jQuery AJAX Change Those color box</h2></div>
+    <button>Rundom Colors</button>
+    <br>
+    <br>
+    <br>
+    <div class="box satu"></div>
+    <div class="box dua"></div>
+    <div class="box tiga"></div>
+    <br>
+    <div class="box empat"></div>
+    <div class="box lima"></div>
+    <div class="box enam"></div>
+    <br>
+    <div class="box tujuh"></div>
+    <div class="box delapan"></div>
+    <div class="box sembilan"></div>
+
+
+</body>
+
+</html>
